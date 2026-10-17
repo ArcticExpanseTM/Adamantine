@@ -539,26 +539,4 @@ craft_upgrade("adamantine:boots_adamantine", N.boots, {
 	{ I, "", I },
 })
 
-minetest.register_chatcommand("adamscan", {
-	description = "Count adamantine ore near you",
-	privs = { server = true },
-	func = function(name)
-		local player = minetest.get_player_by_name(name)
-		if not player then
-			return false, "No player"
-		end
-		local registered = 0
-		for _, ore in pairs(minetest.registered_ores) do
-			if ore.ore == "adamantine:ore" or ore.ore == "adamantine:deepslate_ore" then
-				registered = registered + 1
-			end
-		end
-		local pos = vector.round(player:get_pos())
-		local r = 48
-		local found = minetest.find_nodes_in_area(
-			vector.subtract(pos, r), vector.add(pos, r),
-			{ "adamantine:ore", "adamantine:deepslate_ore" })
-		return true, "Registered ore definitions: " .. registered
-			.. ", ore nodes within " .. r .. " nodes: " .. #found
-	end,
-})
+
