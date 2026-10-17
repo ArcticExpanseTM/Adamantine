@@ -1,9 +1,16 @@
 -- Adamantine: endgame tier above Diamond and Netherite for Mineclonia.
 -- Textures are Mineclonia's own diamond/iron textures, recolored in code.
 -- Tool stats are read from the netherite tools at load time so every
+-- adamantine tool is guaranteed to beat its netherite counterpart.
 
-local TINT = "^[colorize:#9b30ff:140"
+local TINT = "^[hsl:90:30:0^[contrast:20:0"
 
+local METAL_TINT = "^[multiply:#b266ff^[contrast:15:0"
+
+-- ---------------------------------------------------------------------------
+-- Helpers
+-- ---------------------------------------------------------------------------
+-- Inventory image of an existing item, or a fallback texture name.
 local function item_image(name, fallback)
 	local def = minetest.registered_items[name]
 	local img = def and def.inventory_image
@@ -58,9 +65,9 @@ end
 -- Textures
 -- ---------------------------------------------------------------------------
 local TEX = {
-	ingot  = item_image("mcl_core:iron_ingot", "default_steel_ingot.png") .. TINT,
+	ingot  = item_image("mcl_core:iron_ingot", "default_steel_ingot.png") .. METAL_TINT,
 	lump   = item_image("mcl_raw_ores:raw_iron",
-		item_image("mcl_core:diamond", "mcl_core_diamond.png")) .. TINT,
+		item_image("mcl_core:diamond", "mcl_core_diamond.png")) .. METAL_TINT,
 	sword  = item_image("mcl_tools:sword_diamond", "default_tool_diamondsword.png") .. TINT,
 	pick   = item_image("mcl_tools:pick_diamond", "default_tool_diamondpick.png") .. TINT,
 	axe    = item_image("mcl_tools:axe_diamond", "default_tool_diamondaxe.png") .. TINT,
@@ -243,9 +250,9 @@ local function register_adamantine_ore(ore_name, host)
 		ore_type       = "scatter",
 		ore            = ore_name,
 		wherein        = host,
-		clust_scarcity = 20 * 20 * 20,
-		clust_num_ores = 4,
-		clust_size     = 3,
+		clust_scarcity = 24 * 24 * 24,
+		clust_num_ores = 2,
+		clust_size     = 2,
 		y_min          = ore_y_min,
 		y_max          = ORE_Y_MAX,
 	})
