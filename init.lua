@@ -539,4 +539,6 @@ craft_upgrade("adamantine:boots_adamantine", N.boots, {
 	{ I, "", I },
 })
 
+dofile(minetest.get_modpath("adamantine") .. "/placeable_ingots.lua")
 
+dofile(minetest.get_modpath("adamantine") .. "/craftoplus_items.lua")
